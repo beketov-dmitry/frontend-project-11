@@ -4,17 +4,24 @@ import onChange from "on-change";
 import render from "./render";
 import {setLocale} from "yup";
 import i18next from "i18next";
+import parser from "./utils/parser";
+import {uniqueId} from "lodash";
 
 
 export default () => {
 	const initState = {
-		urls: [],
+		data: {
+			feeds: [],
+			posts: [],
+			urls: [],
+		},
         form: {
 	       processState: 'filling',
 	       errorType: null
         }
 	}
 	const i18nextInstance = i18next.createInstance();
+
 	i18nextInstance.init({
 	 	lng: 'ru', // Текущий язык
 	 	debug: true,
@@ -24,7 +31,8 @@ export default () => {
 	 				validErrorAnswer: "Ссылка должна быть валидным URL",
 	 				existErrorAnswer: "RSS уже существует",
 	 				axiosErrorAnswer: "Ошибка сети",
-	 				typeErrorAnswer: "Ресурс не содержит валидный RSS"
+	 				typeErrorAnswer: "Ресурс не содержит валидный RSS",
+				    successAnswer: "RSS спешно загружен"
 	 			},
 	 		},
 	 	},
@@ -47,10 +55,9 @@ export default () => {
 
 	form.addEventListener("submit", (e) => {
 		e.preventDefault();
-
 		const formData = new FormData(e.target);
 		const url = formData.get("url");
-		const feeds = state.urls;
+		const urls = state.data.urls;
 		 setLocale({
 		 	mixed: {
 		 		notOneOf: i18nextInstance.t("existErrorAnswer")
@@ -59,21 +66,23 @@ export default () => {
 		 		url: i18nextInstance.t("validErrorAnswer")
 		 	}
 		 });
-		const schema = yup.string().required().url().notOneOf(feeds);
+		const schema = yup.string().required().url().notOneOf(urls);
 
 		schema.validate(url).then(() => {
 			const modifyURL = `${BASE_URL}${encodeURIComponent(url.toString())}`;
 			state.form.processState = "sending";
 			return axios.get(modifyURL);
 		}).then((response) => {
-			console.log(response.data.contents.split(" "));
+			const postId = uniqueId();
+			const {feed, posts} = parser(url, response.data.contents, postId);
+			state.data.feeds.push(feed);
+			state.data.posts = [...state.data.posts, ...posts];
 			state.form.processState = 'success'
-			state.urls.push(url);
+			state.data.urls.push(url);
+			console.log(response.data.contents/*Array.from(state.data.feeds), Array.from(state.data.posts)*/);
 		}).catch((err) => {
 			state.form.processState = "error";
 			state.form.errorType = err;
-			console.log(err.name);
-			console.log(err.errors);
 		})
 	})
 
