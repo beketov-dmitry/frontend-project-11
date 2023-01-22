@@ -1,6 +1,6 @@
 import handlerProcessState from "./utils/handlerProcessState";
 import handlerError from "./utils/handlerError";
-import {rest} from "lodash";
+import renderFeed from "./utils/renderFeed";
 
 export default (elements, initState, i18nextInstance) => (path, value, previousValue) => {
 	switch (path){
@@ -11,11 +11,10 @@ export default (elements, initState, i18nextInstance) => (path, value, previousV
 			handlerError(value, elements, i18nextInstance);
 			break;
 		case "data.feeds":
-			renderFeeds(value, previousValue, elements, initState);
+			renderFeed(value, previousValue, elements);
 			break;
 		case "data.posts":
 			//renderPosts(value, previousValue, elements, initState);
-			console.log(value, previousValue);
 			break;
 	}
 }

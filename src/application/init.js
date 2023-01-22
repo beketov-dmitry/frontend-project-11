@@ -45,7 +45,8 @@ export default () => {
 			urlInput: document.querySelector("#url-input")
 		},
 		main: {
-			posts: document.querySelector(".posts")
+			posts: document.querySelector(".posts"),
+			feeds: document.querySelector(".feeds")
 		}
 	}
 
