@@ -5,18 +5,18 @@ export default (feedUrl, stringContainingHTMLSource, postId) => {
 	 	throw TypeError;
      }
 	const parser = new DOMParser();
-	const doc = parser.parseFromString(stringContainingHTMLSource, "text/html");
+	const doc = parser.parseFromString(stringContainingHTMLSource, "text/xml");
 	const feedTitle = doc.querySelector("title").textContent;
 	const feedDescription = doc.querySelector("description").textContent;
 	const feedPosts = Array.from(doc.querySelectorAll("item"));
 	const posts = feedPosts.map((post) => {
 		const title = post.querySelector("title").textContent;
-		const url = post.querySelector("link").textContent;
+		const postLink = post.querySelector("link").textContent;
 		const description = post.querySelector("description").textContent;
 		return {
 			id: uniqueId(),
 			postId,
-			url,
+			url: postLink,
 			title,
 			description
 		}

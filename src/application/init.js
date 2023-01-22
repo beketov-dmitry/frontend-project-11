@@ -74,12 +74,12 @@ export default () => {
 			return axios.get(modifyURL);
 		}).then((response) => {
 			const postId = uniqueId();
+			state.form.processState = 'success'
 			const {feed, posts} = parser(url, response.data.contents, postId);
 			state.data.feeds.push(feed);
 			state.data.posts = [...state.data.posts, ...posts];
-			state.form.processState = 'success'
 			state.data.urls.push(url);
-			console.log(response.data.contents, Array.from(state.data.feeds), Array.from(state.data.posts));
+			//console.log(response.data.contents, Array.from(state.data.feeds), Array.from(state.data.posts));
 		}).catch((err) => {
 			state.form.processState = "error";
 			state.form.errorType = err;
