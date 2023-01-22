@@ -1,6 +1,7 @@
 import handlerProcessState from "./utils/handlerProcessState";
 import handlerError from "./utils/handlerError";
 import renderFeed from "./utils/renderFeed";
+import renderPosts from "./utils/renderPosts";
 
 export default (elements, initState, i18nextInstance) => (path, value, previousValue) => {
 	switch (path){
@@ -14,7 +15,8 @@ export default (elements, initState, i18nextInstance) => (path, value, previousV
 			renderFeed(value, previousValue, elements);
 			break;
 		case "data.posts":
-			//renderPosts(value, previousValue, elements, initState);
+			renderPosts(value, previousValue, elements);
+			console.log(value, previousValue);
 			break;
 	}
 }
