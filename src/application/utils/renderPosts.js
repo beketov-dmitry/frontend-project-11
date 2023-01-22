@@ -1,20 +1,5 @@
-const renderHeadAndUl = (elements) => {
-	const card = document.createElement("div")
-	const cardBody = document.createElement("div");
-	const cardTitle = document.createElement("h2");
-	const feedUl = document.createElement("ul");
+import renderHeadAndUl from "./renderHeadAndUl";
 
-	cardBody.classList.add("card-body");
-	cardTitle.classList.add("card-title", "h4");
-	cardTitle.innerHTML = "Посты";
-	feedUl.classList.add("list-group", "border-0", "rounded-0");
-	card.classList.add("card", "border-0");
-
-	cardBody.append(cardTitle);
-	card.append(cardBody);
-	card.append(feedUl);
-	elements.main.posts.append(card);
-}
 
 const makeNewPost = ({id, url, description, title}) => {
     const newPost = document.createElement("li");
@@ -34,15 +19,13 @@ const makeNewPost = ({id, url, description, title}) => {
 	return newPost;
 }
 
-
-
 export default (value, previousValue, elements) => {
 
 	const countOfAll = value.length;
 	const countOfPrevious = previousValue.length;
 
 	if(countOfPrevious === 0){
-		renderHeadAndUl(elements);
+		renderHeadAndUl(elements.main.posts, "Посты");
 	}
 	const countOfNew = countOfAll - countOfPrevious;
 	const newPosts = value.slice(countOfPrevious);

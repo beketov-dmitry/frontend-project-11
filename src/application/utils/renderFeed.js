@@ -1,21 +1,4 @@
-const renderHeadAndUl = (elements) => {
-	const card = document.createElement("div")
-	const cardBody = document.createElement("div");
-	const cardTitle = document.createElement("h2");
-    const feedUl = document.createElement("ul");
-
-
-	cardBody.classList.add("card-body");
-	cardTitle.classList.add("card-title", "h4");
-	cardTitle.innerHTML = "Фиды";
-    feedUl.classList.add("list-group", "border-0", "rounded-0");
-	card.classList.add("card", "border-0");
-
-	cardBody.append(cardTitle);
-	card.append(cardBody);
-	card.append(feedUl);
-	elements.main.feeds.append(card);
-}
+import renderHeadAndUl from "./renderHeadAndUl";
 
 const makeNewFeed = ({title, description}) => {
 	const newFeed = document.createElement("li");
@@ -36,7 +19,7 @@ const makeNewFeed = ({title, description}) => {
 
 export default (value, previousValue, elements) => {
 	if (previousValue.length === 0){
-		renderHeadAndUl(elements);
+		renderHeadAndUl(elements.main.feeds, "Фиды");
 	}
 
      const countOfFeeds = value.length;
