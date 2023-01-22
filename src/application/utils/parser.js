@@ -6,14 +6,13 @@ export default (feedUrl, stringContainingHTMLSource, postId) => {
      }
 	const parser = new DOMParser();
 	const doc = parser.parseFromString(stringContainingHTMLSource, "text/html");
-	const feedTitle = doc.querySelector("title").innerHTML;
-	const feedDescription = doc.querySelector("description").innerHTML;
+	const feedTitle = doc.querySelector("title").textContent;
+	const feedDescription = doc.querySelector("description").textContent;
 	const feedPosts = Array.from(doc.querySelectorAll("item"));
 	const posts = feedPosts.map((post) => {
-		const title = post.querySelector("title").innerHTML;
-		const url = post.querySelector("link").innerHTML;
-		console.log(url);
-		const description = post.querySelector("description").innerHTML;
+		const title = post.querySelector("title").textContent;
+		const url = post.querySelector("link").textContent;
+		const description = post.querySelector("description").textContent;
 		return {
 			id: uniqueId(),
 			postId,

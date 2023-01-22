@@ -79,7 +79,7 @@ export default () => {
 			state.data.posts = [...state.data.posts, ...posts];
 			state.form.processState = 'success'
 			state.data.urls.push(url);
-			console.log(response.data.contents/*Array.from(state.data.feeds), Array.from(state.data.posts)*/);
+			console.log(response.data.contents, Array.from(state.data.feeds), Array.from(state.data.posts));
 		}).catch((err) => {
 			state.form.processState = "error";
 			state.form.errorType = err;
