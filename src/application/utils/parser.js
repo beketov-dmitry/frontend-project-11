@@ -1,6 +1,6 @@
 import {uniqueId} from "lodash";
 
-export default (feedUrl, stringContainingHTMLSource, postId) => {
+export default (stringContainingHTMLSource, postId = 0) => {
 	 if (!stringContainingHTMLSource){
 	 	throw TypeError;
      }
@@ -23,7 +23,6 @@ export default (feedUrl, stringContainingHTMLSource, postId) => {
 	})
 	return {
 		feed: {
-			url: feedUrl,
 			title: feedTitle,
 			description: feedDescription,
 			id: postId
@@ -31,20 +30,3 @@ export default (feedUrl, stringContainingHTMLSource, postId) => {
 		posts
 	}
 }
-
-// <title>Фильтрация значений и подготовка данных для анализа / Python: Pandas</title>
-// <guid isPermaLink="false">3378</guid>
-// <link>https://ru.hexlet.io/courses/python-pandas/lessons/prepare-data/theory_unit</link>
-// <description>Цель: Познакомиться с инструментами Pandas для подготовки и первичного анализа данных</description>
-// <pubDate>Mon, 16 Jan 2023 10:05:04 +0000</pubDate>
-//const post = {
-// 	url: "",
-// 	title: "",
-// 	description: ""
-// }
-// const feed = {
-// 	url: "",
-// 	title: "",
-// 	description: "",
-// 	posts: []
-// }

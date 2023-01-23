@@ -16,7 +16,6 @@ export default (elements, initState, i18nextInstance) => (path, value, previousV
 			break;
 		case "data.posts":
 			renderPosts(value, previousValue, elements);
-			console.log(value, previousValue);
 			break;
 	}
 }

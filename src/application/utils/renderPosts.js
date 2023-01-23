@@ -21,13 +21,11 @@ const makeNewPost = ({id, url, description, title}) => {
 
 export default (value, previousValue, elements) => {
 
-	const countOfAll = value.length;
 	const countOfPrevious = previousValue.length;
 
 	if(countOfPrevious === 0){
 		renderHeadAndUl(elements.main.posts, "Посты");
 	}
-	const countOfNew = countOfAll - countOfPrevious;
 	const newPosts = value.slice(countOfPrevious);
 
 	const postUl = elements.main.posts.querySelector("ul");

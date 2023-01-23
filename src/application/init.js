@@ -6,6 +6,7 @@ import {setLocale} from "yup";
 import i18next from "i18next";
 import parser from "./utils/parser";
 import {uniqueId} from "lodash";
+import updatePosts from "./utils/updatePosts";
 
 
 export default () => {
@@ -18,7 +19,8 @@ export default () => {
         form: {
 	       processState: 'filling',
 	       errorType: null
-        }
+        },
+		BASE_URL: `https://allorigins.hexlet.app/get?url=`
 	}
 	const i18nextInstance = i18next.createInstance();
 
@@ -52,13 +54,13 @@ export default () => {
 
 	const state = onChange(initState, render(elements, initState, i18nextInstance));
 	const {form} = elements.header;
-	const BASE_URL = `https://allorigins.hexlet.app/get?url=`;
 
 	form.addEventListener("submit", (e) => {
 		e.preventDefault();
 		const formData = new FormData(e.target);
 		const url = formData.get("url");
 		const urls = state.data.urls;
+
 		 setLocale({
 		 	mixed: {
 		 		notOneOf: i18nextInstance.t("existErrorAnswer")
@@ -70,22 +72,20 @@ export default () => {
 		const schema = yup.string().required().url().notOneOf(urls);
 
 		schema.validate(url).then(() => {
-			const modifyURL = `${BASE_URL}${encodeURIComponent(url.toString())}`;
+			const modifyURL = `${state.BASE_URL}${encodeURIComponent(url.toString())}`;
 			state.form.processState = "sending";
 			return axios.get(modifyURL);
 		}).then((response) => {
 			const postId = uniqueId();
 			state.form.processState = 'success'
-			const {feed, posts} = parser(url, response.data.contents, postId);
+			const {feed, posts} = parser(response.data.contents, postId);
 			state.data.feeds.push(feed);
 			state.data.posts = [...state.data.posts, ...posts];
 			state.data.urls.push(url);
-			//console.log(response.data.contents, Array.from(state.data.feeds), Array.from(state.data.posts));
+			updatePosts(state);
 		}).catch((err) => {
 			state.form.processState = "error";
 			state.form.errorType = err;
 		})
 	})
-
-
 }
