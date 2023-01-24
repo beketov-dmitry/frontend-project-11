@@ -40,6 +40,8 @@ export default () => {
 	 	},
 	 });
 	const elements = {
+		body: document.querySelector("body"),
+		modal: document.querySelector(".modal"),
 		header: {
 			form: document.querySelector(".rss-form"),
 			feedback:  document.querySelector(".feedback "),

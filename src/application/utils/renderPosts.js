@@ -1,7 +1,10 @@
 import renderHeadAndUl from "./renderHeadAndUl";
 
 
-const makeNewPost = ({id, url, description, title}) => {
+
+
+
+const makeNewPost = ({id, url, description, title}, elements) => {
     const newPost = document.createElement("li");
     const postLink = document.createElement("a");
     const buttonToModal = document.createElement("button")
@@ -10,14 +13,22 @@ const makeNewPost = ({id, url, description, title}) => {
 	postLink.href = url;
     postLink.classList.add("fw-bold");
 	postLink.dataset.id = id;
+
 	postLink.innerHTML = title;
 	postLink.target = "_blank";
 	postLink.rel = "noopener noreferrer";
 	buttonToModal.classList.add("btn", "btn-outline-primary", "btn-sm");
 	buttonToModal.innerHTML = "Просмотр";
+	buttonToModal.dataset.bsToggle = "modal";
+	buttonToModal.dataset.bsTarget = "#exampleModal";
+
+	buttonToModal.addEventListener('click', () => {
+		elements.modal.querySelector(".modal-body").innerHTML = description;
+		elements.modal.querySelector("a").href = url;
+		elements.modal.querySelector(".modal-title").innerHTML = title;
+	})
 
 	newPost.append(postLink, buttonToModal);
-
 	return newPost;
 }
 
@@ -33,7 +44,7 @@ export default (value, previousValue, elements) => {
 	const postUl = elements.main.posts.querySelector("ul");
 
     newPosts.forEach((postInf) => {
-		const newPost = makeNewPost(postInf);
+		const newPost = makeNewPost(postInf, elements);
 		postUl.prepend(newPost);
     })
 }
