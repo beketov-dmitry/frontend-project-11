@@ -10,11 +10,20 @@ const updatePosts = (state) => {
 		promise.then((responses) => {
 			responses.forEach(response => {
 				const {feed, posts} = parser(response.data.contents);
+				let postId = 0;
+				state.data.feeds.forEach(item => {
+					if(item.title === feed.title){
+						 postId = item.id;
+					}
+				})
+				const postsWithId = posts.map(post => ({...post, postId}));
 				const oldPosts = state.data.posts;
-				const newPosts = posts.filter(post => !oldPosts.find(item => item.title === post.title));
+				const newPosts = postsWithId.filter(post => !oldPosts.find(item => (item.title === post.title) && (item.postId === postId)));
 				state.data.posts.push(...newPosts);
-				console.log(newPosts)
+				//console.log(newPosts);
 			})
+		}).catch(err => {
+			throw TypeError;
 		})
 		return updatePosts(state);
 	}, 5000)

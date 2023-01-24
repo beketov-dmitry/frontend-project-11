@@ -82,7 +82,9 @@ export default () => {
 			state.data.feeds.push(feed);
 			state.data.posts = [...state.data.posts, ...posts];
 			state.data.urls.push(url);
-			updatePosts(state);
+			if(state.data.urls.length === 1) {
+				updatePosts(state);
+			}
 		}).catch((err) => {
 			state.form.processState = "error";
 			state.form.errorType = err;
