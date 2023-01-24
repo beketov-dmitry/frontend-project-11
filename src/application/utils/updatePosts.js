@@ -22,8 +22,6 @@ const updatePosts = (state) => {
 				state.data.posts.push(...newPosts);
 				//console.log(newPosts);
 			})
-		}).catch(err => {
-			throw TypeError;
 		})
 		return updatePosts(state);
 	}, 5000)

@@ -10,7 +10,7 @@ export default (value, elements, i18nextInstance) => {
 			elements.header.submit.disabled = false;
 			elements.header.urlInput.innerHTML = "";
 			elements.header.form.reset();
-			elements.header.form.focus();
+			elements.header.urlInput.focus();
 			break;
 		case 'error':
 			elements.header.feedback.classList.remove("text-success");
