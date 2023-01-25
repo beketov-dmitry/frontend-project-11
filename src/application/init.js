@@ -44,6 +44,12 @@ export default () => {
       feeds: document.querySelector('.feeds'),
     },
   };
+  const constructUrl = (link) => {
+    const newUrl = new URL('https://allorigins.hexlet.app/get');
+    newUrl.searchParams.set('disableCache', 'true');
+    newUrl.searchParams.set('url', link);
+    return newUrl;
+  };
 
   const state = onChange(initState, render(elements, initState, i18nextInstance));
   const { form } = elements.header;
@@ -62,9 +68,8 @@ export default () => {
       },
     });
     const schema = yup.string().required().url().notOneOf(urls);
-
     schema.validate(url).then(() => {
-      const modifyURL = `${state.BASE_URL}${encodeURIComponent(url.toString())}`;
+      const modifyURL = constructUrl(url);
       state.form.processState = 'sending';
       return axios.get(modifyURL);
     }).then((response) => {
