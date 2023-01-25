@@ -5,7 +5,7 @@ export default {
       existErrorAnswer: 'RSS уже существует',
       axiosErrorAnswer: 'Ошибка сети',
       typeErrorAnswer: 'Ресурс не содержит валидный RSS',
-      successAnswer: 'RSS спешно загружен',
+      successAnswer: 'RSS успешно загружен',
       readAtAll: 'Читать полностью',
       close: 'Закрыть',
       feeds: 'Фиды',
