@@ -9,7 +9,7 @@ export default {
       readAtAll: 'Читать полностью',
       close: 'Закрыть',
       feeds: 'Фиды',
-      posts: 'Посты'
+      posts: 'Посты',
     },
   },
 };

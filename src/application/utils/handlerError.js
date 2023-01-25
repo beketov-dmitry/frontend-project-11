@@ -7,10 +7,11 @@ const errorMessages = {
 export default (error, elements, i18nextInstance) => {
   const { name, errors } = error;
   switch (name) {
-    case 'ValidationError':
+    case 'ValidationError': {
       const [one] = errors;
       elements.header.feedback.textContent = one;
       break;
+    }
     case 'AxiosError':
       elements.header.feedback.textContent = i18nextInstance.t('axiosErrorAnswer');
       break;
