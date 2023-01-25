@@ -26,6 +26,8 @@ const updatePosts = (state) => {
         state.data.posts.push(...newPosts);
         // console.log(newPosts);
       });
+    }).catch(err => {
+      console.log(err);
     });
     return updatePosts(state);
   }, 5000);
