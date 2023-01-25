@@ -8,7 +8,6 @@ export default (value, elements, i18nextInstance) => {
       elements.header.feedback.classList.add('text-success');
       elements.header.feedback.classList.remove('text-danger');
       elements.header.submit.disabled = false;
-      elements.header.urlInput.innerHTML = '';
       elements.header.form.reset();
       elements.header.urlInput.focus();
       break;

@@ -69,8 +69,8 @@ export default () => {
       return axios.get(modifyURL);
     }).then((response) => {
       const postId = uniqueId();
-      state.form.processState = 'success';
       const { feed, posts } = parser(response.data.contents, postId);
+      state.form.processState = 'success';
       state.data.feeds.push(feed);
       state.data.posts = [...state.data.posts, ...posts];
       state.data.urls.push(url);
