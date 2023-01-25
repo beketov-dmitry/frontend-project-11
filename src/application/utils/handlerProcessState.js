@@ -16,5 +16,8 @@ export default (value, elements, i18nextInstance) => {
       elements.header.feedback.classList.remove('text-success');
       elements.header.feedback.classList.add('text-danger');
       elements.header.submit.disabled = false;
+      break;
+    default:
+      break;
   }
 };

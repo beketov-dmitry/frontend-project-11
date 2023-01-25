@@ -2,7 +2,7 @@ import renderHeadAndUl from './renderHeadAndUl';
 
 const makeNewPost = ({
   id, url, description, title,
-}, elements) => {
+}, elements, state) => {
   const newPost = document.createElement('li');
   const postLink = document.createElement('a');
   const buttonToModal = document.createElement('button');
@@ -15,6 +15,15 @@ const makeNewPost = ({
   postLink.innerHTML = title;
   postLink.target = '_blank';
   postLink.rel = 'noopener noreferrer';
+
+  postLink.addEventListener('click', () => {
+    postLink.classList.add('fw-normal');
+    postLink.classList.remove('fw-bold');
+    state.data.readPosts.push({
+      id, url, description, title,
+    });
+  });
+
   buttonToModal.classList.add('btn', 'btn-outline-primary', 'btn-sm');
   buttonToModal.innerHTML = 'Просмотр';
   buttonToModal.dataset.bsToggle = 'modal';
@@ -24,13 +33,18 @@ const makeNewPost = ({
     elements.modal.querySelector('.modal-body').innerHTML = description;
     elements.modal.querySelector('a').href = url;
     elements.modal.querySelector('.modal-title').innerHTML = title;
+    postLink.classList.add('fw-normal');
+    postLink.classList.remove('fw-bold');
+    state.data.readPosts.push({
+      id, url, description, title,
+    });
   });
 
   newPost.append(postLink, buttonToModal);
   return newPost;
 };
 
-export default (value, previousValue, elements) => {
+export default (value, previousValue, elements, state) => {
   const countOfPrevious = previousValue.length;
 
   if (countOfPrevious === 0) {
@@ -41,7 +55,7 @@ export default (value, previousValue, elements) => {
   const postUl = elements.main.posts.querySelector('ul');
 
   newPosts.forEach((postInf) => {
-    const newPost = makeNewPost(postInf, elements);
+    const newPost = makeNewPost(postInf, elements, state);
     postUl.prepend(newPost);
   });
 };

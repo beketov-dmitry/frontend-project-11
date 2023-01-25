@@ -23,9 +23,9 @@ export default (value, previousValue, elements) => {
   }
 
   const countOfFeeds = value.length;
-	 const newFeedInf = value[countOfFeeds - 1];
-	 const feedUl = elements.main.feeds.querySelector('ul');
-	 const newFeed = makeNewFeed(newFeedInf);
+  const newFeedInf = value[countOfFeeds - 1];
+  const feedUl = elements.main.feeds.querySelector('ul');
+  const newFeed = makeNewFeed(newFeedInf);
 
-	 feedUl.prepend(newFeed);
+  feedUl.prepend(newFeed);
 };

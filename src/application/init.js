@@ -7,37 +7,29 @@ import { uniqueId } from 'lodash';
 import parser from './utils/parser';
 import render from './render';
 import updatePosts from './utils/updatePosts';
+import ru from './utils/locales/ru';
 
 export default () => {
   const initState = {
     data: {
       feeds: [],
       posts: [],
+      readPosts: [],
       urls: [],
     },
     form: {
-	       processState: 'filling',
-	       errorType: null,
+      processState: 'filling',
+      errorType: null,
     },
     BASE_URL: 'https://allorigins.hexlet.app/get?url=',
   };
   const i18nextInstance = i18next.createInstance();
 
   i18nextInstance.init({
-	 	lng: 'ru', // Текущий язык
-	 	debug: true,
-	 	resources: {
-	 		ru: { // Тексты конкретного языка
-	 			translation: { // Так называемый namespace по умолчанию
-	 				validErrorAnswer: 'Ссылка должна быть валидным URL',
-	 				existErrorAnswer: 'RSS уже существует',
-	 				axiosErrorAnswer: 'Ошибка сети',
-	 				typeErrorAnswer: 'Ресурс не содержит валидный RSS',
-				    successAnswer: 'RSS спешно загружен',
-	 			},
-	 		},
-	 	},
-	 });
+    lng: 'ru',
+    debug: true,
+    resources: ru,
+  });
   const elements = {
     body: document.querySelector('body'),
     modal: document.querySelector('.modal'),
@@ -61,15 +53,14 @@ export default () => {
     const formData = new FormData(e.target);
     const url = formData.get('url');
     const { urls } = state.data;
-
-		 setLocale({
-		 	mixed: {
-		 		notOneOf: i18nextInstance.t('existErrorAnswer'),
-		 	},
-		 	string: {
-		 		url: i18nextInstance.t('validErrorAnswer'),
-		 	},
-		 });
+    setLocale({
+      mixed: {
+        notOneOf: i18nextInstance.t('existErrorAnswer'),
+      },
+      string: {
+        url: i18nextInstance.t('validErrorAnswer'),
+      },
+    });
     const schema = yup.string().required().url().notOneOf(urls);
 
     schema.validate(url).then(() => {

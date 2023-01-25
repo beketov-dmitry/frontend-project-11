@@ -12,12 +12,17 @@ const updatePosts = (state) => {
         let postId = 0;
         state.data.feeds.forEach((item) => {
           if (item.title === feed.title) {
-						 postId = item.id;
+            postId = item.id;
           }
         });
         const postsWithId = posts.map((post) => ({ ...post, postId }));
         const oldPosts = state.data.posts;
-        const newPosts = postsWithId.filter((post) => !oldPosts.find((item) => (item.title === post.title) && (item.postId === postId)));
+        const isFindPost = (post) => !oldPosts.find((item) => {
+          const isTitleSame = item.title === post.title;
+          const isPostIdSame = item.postId === postId;
+          return isTitleSame && isPostIdSame;
+        });
+        const newPosts = postsWithId.filter(isFindPost);
         state.data.posts.push(...newPosts);
         // console.log(newPosts);
       });

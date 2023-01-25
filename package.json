@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "[![Actions Status](https://github.com/beketov-dmitry/frontend-project-11/workflows/hexlet-check/badge.svg)](https://github.com/beketov-dmitry/frontend-project-11/actions)",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/beketov-dmitry/frontend-project-11.git"
@@ -19,6 +17,7 @@
   "devDependencies": {
     "@babel/core": "^7.19.3",
     "@babel/preset-env": "^7.16.11",
+    "@playwright/test": "^1.30.0",
     "@webpack-cli/generators": "^3.0.0",
     "babel-loader": "^9.1.0",
     "css-loader": "^6.7.2",

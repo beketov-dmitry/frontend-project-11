@@ -1,8 +1,8 @@
 import { uniqueId } from 'lodash';
 
 export default (stringContainingHTMLSource, postId = 0) => {
-	 if (!stringContainingHTMLSource) {
-	 	throw TypeError;
+  if (!stringContainingHTMLSource) {
+    throw TypeError;
   }
   const parser = new DOMParser();
   const doc = parser.parseFromString(stringContainingHTMLSource, 'text/xml');
