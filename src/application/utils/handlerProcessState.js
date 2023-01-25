@@ -4,7 +4,7 @@ export default (value, elements, i18nextInstance) => {
       elements.header.submit.disabled = true;
       break;
     case 'success':
-      elements.header.feedback.innerHTML = i18nextInstance.t('successAnswer');
+      elements.header.feedback.textContent = i18nextInstance.t('successAnswer');
       elements.header.feedback.classList.add('text-success');
       elements.header.feedback.classList.remove('text-danger');
       elements.header.submit.disabled = false;

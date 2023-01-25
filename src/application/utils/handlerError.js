@@ -9,15 +9,15 @@ export default (error, elements, i18nextInstance) => {
   switch (name) {
     case 'ValidationError':
       const [one] = errors;
-      elements.header.feedback.innerHTML = one;
+      elements.header.feedback.textContent = one;
       break;
     case 'AxiosError':
-      elements.header.feedback.innerHTML = i18nextInstance.t('axiosErrorAnswer');
+      elements.header.feedback.textContent = i18nextInstance.t('axiosErrorAnswer');
       break;
     case 'TypeError':
-      elements.header.feedback.innerHTML = i18nextInstance.t('typeErrorAnswer');
+      elements.header.feedback.textContent = i18nextInstance.t('typeErrorAnswer');
       break;
     default:
-      elements.header.feedback.innerHTML = errorMessages.network.error;
+      elements.header.feedback.textContent = errorMessages.network.error;
   }
 };
