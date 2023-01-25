@@ -1,5 +1,4 @@
 import { uniqueId } from 'lodash';
-import { AxiosError } from 'axios';
 
 export default (stringContainingHTMLSource, postId = 0) => {
   try {
@@ -29,6 +28,6 @@ export default (stringContainingHTMLSource, postId = 0) => {
       posts,
     };
   } catch (e) {
-    throw TypeError('Network Problems');
+    throw TypeError;
   }
 };
