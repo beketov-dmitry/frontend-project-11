@@ -6,9 +6,9 @@ const errorMessages = {
 
 export default (error, elements, i18nextInstance) => {
   const { name, errors } = error;
-  const [one] = errors;
   switch (name) {
     case 'ValidationError':
+      const [one] = errors;
       elements.header.feedback.innerHTML = one;
       break;
     case 'AxiosError':

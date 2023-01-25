@@ -17,9 +17,9 @@ const makeNewFeed = ({ title, description }) => {
   return newFeed;
 };
 
-export default (value, previousValue, elements) => {
+export default (value, previousValue, elements, i18nextInstance) => {
   if (previousValue.length === 0) {
-    renderHeadAndUl(elements.main.feeds, 'Фиды');
+    renderHeadAndUl(elements.main.feeds, i18nextInstance.t('feeds'));
   }
 
   const countOfFeeds = value.length;

@@ -77,6 +77,7 @@ export default () => {
       if (state.data.urls.length === 1) {
         updatePosts(state);
       }
+      console.log("fds");
     }).catch((err) => {
       state.form.processState = 'error';
       state.form.errorType = err;

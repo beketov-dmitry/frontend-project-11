@@ -1,10 +1,7 @@
 import { uniqueId } from 'lodash';
-import {AxiosError} from "axios";
+import { AxiosError } from 'axios';
 
 export default (stringContainingHTMLSource, postId = 0) => {
-  if (!stringContainingHTMLSource) {
-    throw TypeError;
-  }
   try {
     const parser = new DOMParser();
     const doc = parser.parseFromString(stringContainingHTMLSource, 'text/xml');
@@ -31,7 +28,7 @@ export default (stringContainingHTMLSource, postId = 0) => {
       },
       posts,
     };
-  }catch (e){
-    throw AxiosError("Network Problems");
+  } catch (e) {
+    throw TypeError('Network Problems');
   }
 };

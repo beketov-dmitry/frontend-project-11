@@ -12,10 +12,10 @@ export default (elements, initState, i18nextInstance) => (path, value, previousV
       handlerError(value, elements, i18nextInstance);
       break;
     case 'data.feeds':
-      renderFeed(value, previousValue, elements);
+      renderFeed(value, previousValue, elements, i18nextInstance);
       break;
     case 'data.posts':
-      renderPosts(value, previousValue, elements, initState);
+      renderPosts(value, previousValue, elements, initState, i18nextInstance);
       break;
     default:
       break;

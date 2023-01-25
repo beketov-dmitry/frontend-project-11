@@ -6,6 +6,10 @@ export default {
       axiosErrorAnswer: 'Ошибка сети',
       typeErrorAnswer: 'Ресурс не содержит валидный RSS',
       successAnswer: 'RSS спешно загружен',
+      readAtAll: 'Читать полностью',
+      close: 'Закрыть',
+      feeds: 'Фиды',
+      posts: 'Посты'
     },
   },
 };

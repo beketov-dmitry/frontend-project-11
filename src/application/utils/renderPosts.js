@@ -2,7 +2,7 @@ import renderHeadAndUl from './renderHeadAndUl';
 
 const makeNewPost = ({
   id, url, description, title,
-}, elements, state) => {
+}, elements, state, i18nextInstance) => {
   const newPost = document.createElement('li');
   const postLink = document.createElement('a');
   const buttonToModal = document.createElement('button');
@@ -33,6 +33,8 @@ const makeNewPost = ({
     elements.modal.querySelector('.modal-body').innerHTML = description;
     elements.modal.querySelector('a').href = url;
     elements.modal.querySelector('.modal-title').innerHTML = title;
+    elements.modal.querySelector('.full-article').innerHTML = i18nextInstance.t('readAtAll');
+    elements.modal.querySelector('.btn-secondary').innerHTML = i18nextInstance.t('close');
     postLink.classList.add('fw-normal');
     postLink.classList.remove('fw-bold');
     state.data.readPosts.push({
@@ -44,18 +46,18 @@ const makeNewPost = ({
   return newPost;
 };
 
-export default (value, previousValue, elements, state) => {
+export default (value, previousValue, elements, state, i18nextInstance) => {
   const countOfPrevious = previousValue.length;
 
   if (countOfPrevious === 0) {
-    renderHeadAndUl(elements.main.posts, 'Посты');
+    renderHeadAndUl(elements.main.posts, i18nextInstance.t('posts'));
   }
   const newPosts = value.slice(countOfPrevious);
 
   const postUl = elements.main.posts.querySelector('ul');
 
   newPosts.forEach((postInf) => {
-    const newPost = makeNewPost(postInf, elements, state);
+    const newPost = makeNewPost(postInf, elements, state, i18nextInstance);
     postUl.prepend(newPost);
   });
 };
